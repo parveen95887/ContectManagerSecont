@@ -57,10 +57,15 @@ public class SecurityConfig {
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		
+		//.loginPage("/login")
 		  http.authorizeRequests()
 		  .requestMatchers("/user/**").hasAuthority("USER")
 		  .requestMatchers("/admin").hasAuthority("ADMIN")
-		  .requestMatchers("/**").permitAll().and().formLogin().and().csrf().disable();
+		  .requestMatchers("/**").permitAll().and().formLogin()
+		  .loginPage("/login")
+		  .defaultSuccessUrl("/user/index")
+		  .failureUrl("/form-error")
+		  .and().csrf().disable();
 		   http.authenticationProvider(DaoauthenticationProvider());
 		  DefaultSecurityFilterChain build = http.build();
 		  return build;
