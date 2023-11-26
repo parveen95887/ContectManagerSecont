@@ -1,5 +1,6 @@
 package com.smart.contact.Entity;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,7 +20,7 @@ import jakarta.validation.constraints.Size;
 
 
 @Entity
-public class user {
+public class user implements Serializable {
 	@Id@GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
 	@NotBlank(message="name field required")

@@ -96,7 +96,6 @@ public class HomeController {
 		}
 		return "registration";	
 	}
-	
 	@RequestMapping("/form-error")
 	public String getErrorpage(Model m){
 		m.addAttribute("title","error-page");		

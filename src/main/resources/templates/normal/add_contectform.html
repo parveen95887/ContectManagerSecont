@@ -6,26 +6,116 @@
     <title>Bootstrap demo</title>
   </head>
   <body>
-<section class="container-fluid">
+<section class="container">
  <div class="row">	 
      <div class="card">
-		 
      <div class="card-body">
+		 <div class="alert alert-primary " th:if="${session.massage}" th:classappend="${session.massage.type}" role="alert">
+               <p th:text="${session.massage.content}"></p>
+               <!--<th:block th:text="${#session.removeAttribute('massage')}"></th:block>-->
+              </div>		
 		 <h1 class="text-center">Add Contect</h1>
-     <div class="container-fluid mt-1">
-     <div class="row">
-		 <div class="col-md-10 offset-md-1">
-			 <form action="" th:action="@{user/process-contect-form}" th:object="${contact}" method="post" enctype="multipart/form-data">
-				 <div class="d-flex flex-row align-items-center mb-4">
-                    <i class="fas fa-user fa-lg  fa-fw"></i>
-                    <div class="form-outline flex-fill mb-0">
-                      <input type="text" id="form3Example1c" class="form-control" />
-                      <label class="form-label" for="form3Example1c">Enter you name </label>
-                    </div>
-                  </div>
-			 </form>
+     <div class="container mt-1">
+		 <div class="col-md-9 offset-md-1">
+			 <!--form statr-->                                                                                              
+			 <form action="" th:action="@{/user/proce+ss-contect-form}" th:object="${contact}" method="post" enctype="multipart/form-data">
+				 <!--name -->
+      <label class="sr-only" for="inlineFormInputGroupUsername">Username</label>
+      <div class="input-group">
+        <div class="input-group-prepend">
+          <div class="input-group-text  py-1 px-2">
+			  <i class="fa fa-plus fa-2x"></i>
+		  </div>
+        </div>
+        <input type="text" name="name"
+        th:field="*{name}"
+        th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : ''"
+         class="form-control" th:value="${contact.name}"
+         id="inlineFormInputGroupUsername" placeholder="Name">
+         <div class="invalid-feedback" th:if="${#fields.hasErrors('name')}"  th:errors="*{name}" ></div>
+      </div>
+       <!-- start nickname-->
+      <label class="sr-only" for="inlineFormInputGroupUsername">nicname</label>
+      <div class="input-group my-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text py-1 px-2">
+			  <i class="fas fa-user-alt fa-2x"></i>
+		  </div>
+        </div>
+        <input type="text" name="nicname"
+        th:field="*{nicname}"
+           th:classappend="${#fields.hasErrors('nicname')} ? 'is-invalid' : ''" 
+        class="form-control" th:value="${contact.nicname}" id="inlineFormInputGroupUsername" placeholder="nickname">
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('nicname')}"  th:errors="*{nicname}" >
+             </div>
+      </div>
+      <!--nicname end-->
+    <!-- start Email -->
+    <label class="sr-only" for="inlineFormInputGroupUsername">Email</label>
+      <div class="input-group my-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text px-3 py-2 ">
+			  @
+		  </div>
+        </div>
+        <input type="email" name="email"
+         th:field="*{email}"
+         th:classappend="${#fields.hasErrors('email')} ?'is-invalid' : ''" 
+        th:value="${contact.email}" class="form-control" 
+        id="inlineFormInputGroupUsername" placeholder="Email">
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('email')}"  th:errors="*{email}" >
+        </div>
+        
+      </div>
+      <!--email end-->     
+    <!--phone start -->
+     <label class="sr-only" for="inlineFormInputGroupUsername">phone</label>
+      <div class="input-group my-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text px-2 py-2">
+			  <i class="fa fa-phone fa-2x"></i>
+		  </div>
+        </div>
+        <input type="text" name="phone"  class="form-control" 
+        id="inlineFormInputGroupUsername" placeholder="phoneNumber"
+         th:field="*{phone}"
+         th:classappend="${#fields.hasErrors('phone')} ? 'is-invalid' : ''">
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('phone')}"  th:errors="*{phone}" >
+             </div>
+      </div>
+      <!--phone end -->             
+      <!--work start -->       
+     <label class="sr-only" for="inlineFormInputGroupUsername">work</label>
+      <div class="input-group my-2">
+        <div class="input-group-prepend">
+          <div class="input-group-text px-2 py-2">
+			  <i class="fa fa-briefcase fa-2x"></i>
+		  </div>
+        </div>
+        <input type="text" name="work"
+         th:field="*{work}"
+         th:classappend="${#fields.hasErrors('work')} ? 'is-invalid' : ''" 
+        th:value="${contact.work}" class="form-control" 
+        id="inlineFormInputGroupUsername" placeholder="work">
+        <div class="invalid-feedback" th:if="${#fields.hasErrors('work')}"  th:errors="*{work}" >
+        </div>
+      </div>          
+     <!--work end -->
+     <!--about start -->  
+      <div class="form-group">
+		  <textarea name="about" th:value="${contact.about}" rows="5" placeholder="enter your description" class="form-control"></textarea>
+	  </div>
+	  <!--about end-->
+	  <!--img start--> 
+	  <div class="custome-file mt-2">
+		  <input type="file"  name="image">
+	  </div>  
+	  <div class="container text-center mt-2">
+		  <button class="btn btn-danger" type="submit" >save contect</button>
+	  </div>
+		</form>
+		<!--form end-->
 		 </div>
-	 </div>
 	 </div>
 	 </div>
 	 </div>
